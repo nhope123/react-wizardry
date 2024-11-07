@@ -1,7 +1,7 @@
 {
   "name": "react-wizardry",
   "displayName": "'React Wizardry'",
-  "description": "Simplify your React development workflow with ReactWizardry!",
+  "description": "Simplify your React development workflow with React Wizardry!",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -16,6 +16,10 @@
       {
         "command": "react-wizardry.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "react-wizardry.generateComponent",
+        "title": "Generate Component"
       }
     ]
   },
