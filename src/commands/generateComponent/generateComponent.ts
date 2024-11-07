@@ -3,11 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { generateComponentFiles } from './helpers';
 
-// fix error in import statement of the extension.ts file
-
-let generateComponent = 
-// vscode.commands.registerCommand('react-wizardry.generateComponent', 
-async () => {
+let generateComponent = async () => {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders) {
     vscode.window.showErrorMessage('Please open a folder first.');
@@ -23,7 +19,12 @@ async () => {
   if (!componentName) {
     return; // User canceled the input
   } else {
-    componentName = componentName[0].toUpperCase() + componentName.replace(/[^a-zA-Z0-9]/g, '').slice(1); // Remove special characters
+    
+    componentName = componentName
+      .replace(/[^a-zA-Z0-9]/g, ' ')
+      .split(' ')
+      .map((word) => (word.charAt(0).toLocaleUpperCase() + word.slice(1)))
+      .join('');
   }
 
   // Ask if the component should have props
@@ -58,10 +59,23 @@ async () => {
 
   // Create the folder for the new component
   const componentFolderPath = path.join(targetFolderPath, componentName);
-  if (!fs.existsSync(componentFolderPath)) {
-    fs.mkdirSync(componentFolderPath);
-  }
+  if (fs.existsSync(componentFolderPath)) {
+    const overwrite = await vscode.window.showQuickPick(
+      ['Yes', 'No'], 
+      { placeHolder: `The folder ${componentName} already exists. Do you want to overwrite it?` }
+    ) === 'Yes';
 
+    if (!overwrite) {
+      vscode.window.showErrorMessage('Operation cancelled.');
+      return;
+    } else {
+      fs.rmdirSync(componentFolderPath, { recursive: true });
+    }
+  } 
+  
+  fs.mkdirSync(componentFolderPath); 
+
+  
   // Define the files and their contents
   const files = generateComponentFiles(componentName, hasProps);
 
@@ -73,6 +87,4 @@ async () => {
 
   vscode.window.showInformationMessage(`Component ${componentName} created successfully!`);
 };
-// );
-
 export default generateComponent;
