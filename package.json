@@ -14,12 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "react-wizardry.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "react-wizardry.generateComponent",
-        "title": "Generate Component"
+        "title": "Generate Component Folder"
       }
     ]
   },
