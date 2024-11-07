@@ -5,7 +5,7 @@ const generateFile = (name: string, extension: string, content: string) => ({
 
 const generateComponentContent = (componentName: string, hasProps: boolean = false) => {
   const componentType = hasProps ? `FC<${componentName}Props> (props)` : `FC ()`;
-  const propsImport = hasProps ? `import { ${componentName}Props } from './types';\n` : '';
+  const propsImport = hasProps ? `import { ${componentName}Props } from './types';` : '';
   const componentImport = `import { FC } from 'react';\n${propsImport}`;
   const componentDeclaration = `
     \nconst ${componentName}: ${componentType} => {\n

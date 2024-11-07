@@ -5,7 +5,9 @@ import { generateComponentFiles } from './helpers';
 
 // fix error in import statement of the extension.ts file
 
-let generateComponent = vscode.commands.registerCommand('react-wizardry.generateComponent', async () => {
+let generateComponent = 
+// vscode.commands.registerCommand('react-wizardry.generateComponent', 
+async () => {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders) {
     vscode.window.showErrorMessage('Please open a folder first.');
@@ -70,6 +72,7 @@ let generateComponent = vscode.commands.registerCommand('react-wizardry.generate
   }
 
   vscode.window.showInformationMessage(`Component ${componentName} created successfully!`);
-});
+};
+// );
 
 export default generateComponent;
