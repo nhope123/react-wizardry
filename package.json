@@ -15,7 +15,14 @@
     "commands": [
       {
         "command": "react-wizardry.generateComponent",
-        "title": "Generate Component Folder"
+        "title": "Create Component",
+        "category": "RWiz"
+      },
+      {
+        "command": "react-wizardry.createHook",
+        "title": "Create React Hook",
+        "category": "RWiz",
+        "icon": "./src/assets/wizard.svg"
       }
     ]
   },
