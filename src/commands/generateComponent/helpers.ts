@@ -1,4 +1,3 @@
-
 /**
  * Creates a file object with the specified name, extension, and content.
  *
@@ -7,8 +6,12 @@
  * @param content - The content to be included in the file.
  * @returns An object representing the file, with the key being the file name and extension, and the value being the content.
  */
-const createFileObject = (name: string, extension: string, content: string) => ({
-  [`${name}.${extension}`]: content,
+const createFileObject = (
+	name: string,
+	extension: string,
+	content: string
+) => ({
+	[`${name}.${extension}`]: content,
 });
 
 /**
@@ -25,19 +28,25 @@ const createFileObject = (name: string, extension: string, content: string) => (
  * - Return a simple JSX element containing the component's name.
  * - Export the component as the default export.
  */
-const createComponentSource = (componentName: string, hasProps: boolean = false) => {
-  const componentFunctionType = hasProps ?
-    `FC<${componentName}Props> (props: ${componentName}Props)` : `FC ()`;
-  const conditionalPropsImport = hasProps ? `import { ${componentName}Props } from './types';` : '';
-  const componentImportStatement = `import { FC } from 'react';\n${conditionalPropsImport}`;
-  const createComponentDeclaration = `
-    \nconst ${componentName}: ${componentFunctionType} => {
-  ${hasProps ? 'const { } = props;' : ''}
-  \n\treturn <div>${componentName} Component</div>;\n};
-  \nexport default ${componentName};\n
+const createComponentSource = (
+	componentName: string,
+	hasProps: boolean = false
+) => {
+	const componentFunctionType = hasProps
+		? `FC<${componentName}Props> = (props)`
+		: `FC = ()`;
+	const conditionalPropsImport = hasProps
+		? `\nimport { ${componentName}Props } from './types';\n`
+		: '\n';
+	const componentImportStatement = `import { FC } from 'react';${conditionalPropsImport}`;
+	const createComponentDeclaration = `
+const ${componentName}: ${componentFunctionType} => {
+  ${hasProps ? 'const { } = props;\n' : ''}
+  return <div>${componentName} Component</div>;\n};
+  \nexport default ${componentName};
   `;
 
-  return componentImportStatement + createComponentDeclaration;
+	return componentImportStatement + createComponentDeclaration;
 };
 
 /**
@@ -47,7 +56,7 @@ const createComponentSource = (componentName: string, hasProps: boolean = false)
  * @returns A string representing the TypeScript interface definition for the component's props.
  */
 const createComponentPropsDefinition = (componentName: string) =>
-    `interface ${componentName}Props {\n\n};\n\nexport { ${componentName}Props };`;
+	`interface ${componentName}Props {\n\n};\n\nexport { ${componentName}Props };`;
 
 /**
  * Generates the content for a component test file.
@@ -59,14 +68,20 @@ const createComponentPropsDefinition = (componentName: string) =>
  * @returns A string containing the test file content for the specified component.
  */
 const createComponentTestContent = (componentName: string) => {
-  const componentTestImport = `import { render } from '@testing-library/react';\nimport ${componentName} from './${componentName}';`;
-  const renderTestDeclaration = `
-  \ntest('renders ${componentName}', () => {\n
-  const { getByText } = render(<${componentName} />);\n
-  expect(getByText('${componentName} Component')).toBeInTheDocument();\n});\n
-  `;
+	const componentTestImport = `import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import ${componentName} from './${componentName}';
+`;
+	const renderTestDeclaration = `
+describe('${componentName}', () => {  
+  it('renders ${componentName}', () => {
+    const { getByText } = render(<${componentName} />);\n
+    expect(getByText('${componentName} Component')).toBeInTheDocument();
+  });
+});
+`;
 
-  return componentTestImport + renderTestDeclaration;
+	return componentTestImport + renderTestDeclaration;
 };
 
 /**
@@ -76,15 +91,31 @@ const createComponentTestContent = (componentName: string) => {
  * @param hasProps - A boolean indicating whether the component has props. Defaults to `false`.
  * @returns An object containing the generated files.
  */
-const generateComponentFiles = (componentName: string, hasProps: boolean = false) => {
-  const filesToGenerate = {
-    ...createFileObject(componentName, 'tsx', createComponentSource(componentName, hasProps)),
-    ...(hasProps ? createFileObject('types', 'ts', createComponentPropsDefinition(componentName)) : {}),
-    ...createFileObject(`${componentName}.test`, 'tsx', createComponentTestContent(componentName)),
-  };
+const generateComponentFiles = (
+	componentName: string,
+	hasProps: boolean = false
+) => {
+	const filesToGenerate = {
+		...createFileObject(
+			componentName,
+			'tsx',
+			createComponentSource(componentName, hasProps)
+		),
+		...(hasProps
+			? createFileObject(
+					'types',
+					'ts',
+					createComponentPropsDefinition(componentName)
+			  )
+			: {}),
+		...createFileObject(
+			`${componentName}.test`,
+			'tsx',
+			createComponentTestContent(componentName)
+		),
+	};
 
-  return filesToGenerate;
+	return filesToGenerate;
 };
-
 
 export { generateComponentFiles };
