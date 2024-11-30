@@ -1,11 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { isWorkspaceConfigured, showInputBox, showQuickPick } from '../helpers/vscodeHelpers';
+import { getCurrentWorkspaceFolders, showInputBox, showQuickPick } from '../helpers/vscodeHelpers';
 import { generateComponentFiles } from './helpers';
 
 let generateComponent = async () => {
-	if (!isWorkspaceConfigured()) {
+  const workspaceFolder = getCurrentWorkspaceFolders();
+	if (!workspaceFolder) {
 		return;
 	}
 
@@ -36,9 +37,7 @@ let generateComponent = async () => {
 		'Where do you want to create the component?'
 	);
 
-	let targetFolderPath = vscode.workspace.workspaceFolders
-		? vscode.workspace.workspaceFolders[0].uri.fsPath
-		: ''; // Default to root folder
+	let targetFolderPath = workspaceFolder[0].uri.fsPath; // Default to root folder
 
 	if (selectedFolder === 'Select Folder') {
 		const folderUri = await vscode.window.showOpenDialog({

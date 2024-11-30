@@ -1,10 +1,27 @@
-import { isWorkspaceConfigured, showInputBox, showQuickPick } from "../helpers/vscodeHelpers";
+import { findDirectory, getCurrentWorkspaceFolders, showInputBox, showQuickPick } from "../helpers/vscodeHelpers";
+import * as vscode from 'vscode';
 
 const generateHook = async () => {
 
-  if (!isWorkspaceConfigured()) {
-		return;
-	}
+  const workspaceFolders = getCurrentWorkspaceFolders();
+	if (!workspaceFolders) {
+		return null;
+	} 
+
+  /*
+    TODO: complete the hook folder location
+  */
+  // const hooksFolder = await findDirectory('hooks');
+
+  // let destinationFolder: string;
+  // if (!hooksFolder) {
+  //   destinationFolder = await showQuickPick(
+  //     ['src/hooks', 'src/components', 'src/utils'],
+  //     'Select a destination folder for the new hook'
+  //   );
+  // } else {
+  //   destinationFolder = hooksFolder;
+  // }
 
   // get the name
   const hookName = await showInputBox(
@@ -22,6 +39,8 @@ const generateHook = async () => {
     }
   }
 
+  
+
   const hasUseState = await showQuickPick(['Yes', 'No'], 'Should have useState?');
 
 
@@ -34,5 +53,7 @@ const generateHook = async () => {
   // return 
 
 };
+
+const hookTemplateUtils = ''
 
 export default generateHook;
