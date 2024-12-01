@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"module": "Node16",
+		"module": "CommonJS",
 		"target": "ES2022",
 		"outDir": "out",
 		"lib": ["dom", "ES2022"],
@@ -10,16 +10,19 @@
 			"@commands/*": ["./src/commands/*"]
 		},
 		"sourceMap": true,
-		"rootDir": "./src/",
+		"rootDir": "./",
 		"strict": true /* enable all strict type-checking options */,
 		"forceConsistentCasingInFileNames": true,
-		// "allowImportingTsExtensions": true,
-		// "noEmit": true
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"types": ["jest"]
+		// "moduleResolution": "node16"
 		/* Additional Checks */
 		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
 		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
 		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
 	},
-	"include": ["./src/**/*", "../vitest.config.ts"],
+	"include": ["./src/**/*", "./jest.config.ts", "./package.json", "**/*.test.ts"],
 	"exclude": ["node_modules"]
 }

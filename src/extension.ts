@@ -1,8 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import generateComponent from './commands/generateComponent/generateComponent.ts';
-import generateHook from './commands/generateHook/generateHook.ts';
+import generateComponent from './commands/generateComponent/generateComponent.js';
+import generateHook from './commands/generateHook/generateHook.js';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed

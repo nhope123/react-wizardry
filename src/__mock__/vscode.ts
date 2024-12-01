@@ -1,21 +1,21 @@
 
-import { vi } from 'vitest';
+import { jest } from '@jest/globals';
 export const commands = {
-  registerCommand: vi.fn(),
+  registerCommand: jest.fn(),
 };
 
 export const window = {
-  showInformationMessage: vi.fn(),
+  showInformationMessage: jest.fn(),
 };
 
 export const workspace = {
-  getConfiguration: vi.fn(() => ({
-    get: vi.fn(),
+  getConfiguration: jest.fn(() => ({
+    get: jest.fn(),
   })),
 };
 
 export const Uri = {
-  file: vi.fn(),
+  file: jest.fn(),
 };
 
 // Add other VS Code APIs your tests require

@@ -1,4 +1,4 @@
-import { capitalize, createFileObject } from "../helpers/generatorHelpers.ts";
+import { capitalize, createFileObject } from "../helpers/generatorHelpers.js";
 
 const createHookSource = (hookName: string, hasState: boolean, hasEffect: boolean) => {
   const stateImport = hasState || hasEffect ? `import { ${hasState ? 'useState,' : ''} ${hasEffect ? 'useEffect' : ''} } from 'react';\n` : '';

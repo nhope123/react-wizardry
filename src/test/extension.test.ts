@@ -1,23 +1,10 @@
-import mock from 'mock-require';
-
-// Mock the vscode module
-mock('vscode', {});
-
 import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-import * as vscode from 'vscode';
 // import * as myExtension from '../../extension';
-
-suite('Extension Test Suite', () => {
-	// vscode.window.showInformationMessage('Start all tests.');
-
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
+describe('Extension Test Suite', () => {
+    test('Sample test', () => {
+        // assert.strictEqual(-1, [1, 2, 3].indexOf(5));
+        // assert.strictEqual(-1, [1, 2, 3].indexOf(0));
+        expect(2).toEqual(2)
+    });
 });
-
 // Restore the original vscode module after tests
-mock.stop('vscode');

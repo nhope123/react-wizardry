@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
 import {
 	createComponentPropsDefinition,
 	createComponentSource,
 	createComponentTestContent,
 	generateComponentFiles,
-} from './componentTemplateUtils';
+} from './componentTemplateUtils.js';
+
+
 
 describe('componentTemplateUtils', () => {
 	describe('createComponentSource', () => {

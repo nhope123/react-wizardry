@@ -1,6 +1,6 @@
 import path from 'path';
 import * as vscode from 'vscode';
-import { FileObject, TargetFolder } from './types.ts';
+import { FileObject, TargetFolder } from './types.js';
 import * as fs from 'fs';
 
 const SELECT_FOLDER_OPTION = 'Select Folder';

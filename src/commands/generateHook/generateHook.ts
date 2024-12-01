@@ -8,8 +8,8 @@ import {
 	getCurrentWorkspaceFolders,
 	getTargetFolder,
 	showQuickPick,
-} from '../helpers/vscodeHelpers.ts';
-import { generateHookFiles } from './hookTemplateUtils.ts';
+} from '../helpers/vscodeHelpers.js';
+import { generateHookFiles } from './hookTemplateUtils.js';
 
 const regex = /^use/i;
 
