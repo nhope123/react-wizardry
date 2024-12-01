@@ -1,29 +1,28 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { getCurrentWorkspaceFolders, showInputBox, showQuickPick } from '../helpers/vscodeHelpers';
+import {
+  getComponentName,
+	getCurrentWorkspaceFolders,
+	showInputBox,
+	showQuickPick,
+} from '../helpers/vscodeHelpers';
 import { generateComponentFiles } from './helpers';
 
 let generateComponent = async () => {
-  const workspaceFolder = getCurrentWorkspaceFolders();
+	const workspaceFolder = getCurrentWorkspaceFolders();
 	if (!workspaceFolder) {
 		return;
-	}
+	}	
 
 	// Prompt the user for the component name
-	let componentName = await showInputBox(
-    'Enter the component name',
+	const componentName = await getComponentName(
+		'Enter the component name',
 		'Component name cannot be empty'
-  );
+	);
 
 	if (!componentName) {
 		return; // User canceled the input
-	} else {
-		componentName = componentName
-			.replace(/[^a-zA-Z0-9]/g, ' ')
-			.split(' ')
-			.map((word) => word.charAt(0).toLocaleUpperCase() + word.slice(1))
-			.join('');
 	}
 
 	// Ask if the component should have props

@@ -1,5 +1,7 @@
-import { findDirectory, getCurrentWorkspaceFolders, showInputBox, showQuickPick } from "../helpers/vscodeHelpers";
+import { findDirectory, getComponentName, getCurrentWorkspaceFolders, showInputBox, showQuickPick } from "../helpers/vscodeHelpers";
 import * as vscode from 'vscode';
+
+const regex = /^use/i; 
 
 const generateHook = async () => {
 
@@ -24,18 +26,17 @@ const generateHook = async () => {
   // }
 
   // get the name
-  const hookName = await showInputBox(
+ 
+  let hookName = await getComponentName(
     'Enter Hook Name. (eg. State)', 
     'Hook Name cannot be empty'
   );
 
-  let formattedHookName: string;
-
   if (hookName) {
-    if (hookName.startsWith('use')) {
-      formattedHookName = hookName.slice(0, 3) + hookName.charAt(3).toUpperCase() + hookName.slice(4);
+    if (regex.test(hookName)) {
+      hookName = hookName.charAt(0).toLowerCase() + hookName.slice(1);
     } else {
-      formattedHookName = 'use' + hookName.charAt(0).toUpperCase() + hookName.slice(1);
+      hookName = 'use' + hookName;
     }
   }
 
@@ -51,6 +52,10 @@ const generateHook = async () => {
   // should have useEffect
 
   // return 
+
+  vscode.window.showInformationMessage(
+		`Custom hook ${hookName} created successfully!`
+	);
 
 };
 

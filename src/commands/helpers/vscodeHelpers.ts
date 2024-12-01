@@ -37,3 +37,20 @@ export const findDirectory = async (name: string): Promise<string | null> => {
 
 	return null;
 };
+
+export const getComponentName = async (prompt: string, invalidText: string) => {
+  // Prompt the user for the component name
+  let componentName = await showInputBox(prompt, invalidText);
+
+  if (!componentName) {
+    return; // User canceled the input
+  } else {
+    componentName = componentName
+      .replace(/[^a-zA-Z0-9]/g, ' ')
+      .split(' ')
+      .map((word) => word.charAt(0).toLocaleUpperCase() + word.slice(1))
+      .join('');
+  }
+
+  return componentName;
+};
