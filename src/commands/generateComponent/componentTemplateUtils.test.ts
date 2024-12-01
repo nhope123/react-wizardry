@@ -4,7 +4,7 @@ import {
 	createComponentSource,
 	createComponentTestContent,
 	generateComponentFiles,
-} from './componentTemplateUtils.ts';
+} from './componentTemplateUtils';
 
 describe('componentTemplateUtils', () => {
 	describe('createComponentSource', () => {
