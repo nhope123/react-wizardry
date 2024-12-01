@@ -1,10 +1,10 @@
 {
 	"name": "react-wizardry",
-	"displayName": "'React Wizardry'",
+	"displayName": "React Wizardry",
 	"description": "Simplify your React development workflow with React Wizardry!",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"type": "module",
-	"publisher": "nhope",
+	
 	"repository": "https://github.com/nhope123/react-wizardry.git",
 	"keywords": [
 		"react",
@@ -17,9 +17,11 @@
 		"vscode": "^1.95.0"
 	},
 	"categories": [
-		"Other"
+		"Programming Languages"
 	],
-	"main": "./out/extension.js",
+	"activationEvents": [
+	],
+	"main": "dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -30,8 +32,7 @@
 			{
 				"command": "react-wizardry.createHook",
 				"title": "Create React Hook",
-				"category": "RWiz",
-				"icon": "./src/assets/wizard.svg"
+				"category": "RWiz"
 			}
 		]
 	},
@@ -40,27 +41,26 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint .",
-		"test": "jest"
+		"lint": "eslint --debug . ",
+		"test": "jest",
+		"posttest": "npm run clean"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.5.14",
-		"@types/mock-require": "^3.0.0",
 		"@types/node": "22.10.1",
 		"@types/vscode": "^1.95.0",
 		"@typescript-eslint/eslint-plugin": "^8.16.0",
 		"@typescript-eslint/parser": "^8.16.0",
 		"@vscode/test-cli": "^0.0.10",
 		"@vscode/test-electron": "^2.4.1",
+		"@vscode/vsce": "^3.2.1",
 		"eslint": "^9.16.0",
 		"jest": "^29.7.0",
-		"mock-require": "^3.0.3",
 		"ts-jest": "^29.2.5",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.7.2"
 	},
 	"dependencies": {
-		"@vscode/vsce": "^3.2.1",
 		"global": "^4.4.0"
 	}
 }

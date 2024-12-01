@@ -1,3 +1,5 @@
+import { FileObject } from "./types";
+
 /**
  * Creates a file object with the specified name, extension, and content.
  *
@@ -10,7 +12,7 @@ export const createFileObject = (
 	name: string,
 	extension: string,
 	content: string
-) => ({
+): FileObject => ({
 	[`${name}.${extension}`]: content,
 });
 

@@ -1,6 +1,7 @@
 import { capitalize, createFileObject } from "../helpers/generatorHelpers.js";
+import { FileObject } from "../helpers/types.js";
 
-const createHookSource = (hookName: string, hasState: boolean, hasEffect: boolean) => {
+const createHookSource = (hookName: string, hasState: boolean, hasEffect: boolean): string => {
   const stateImport = hasState || hasEffect ? `import { ${hasState ? 'useState,' : ''} ${hasEffect ? 'useEffect' : ''} } from 'react';\n` : '';
   const stateDeclaration = hasState ? `const [state, setState] = useState<>(null);\n` : '';
   const effectDeclaration = hasEffect ? `useEffect(() => {\n    // effect logic\n  }, []);\n` : '';
@@ -18,7 +19,7 @@ export default ${hookName};
 `);
 };
 
-const createHookTestContent = (hookName: string) => {
+const createHookTestContent = (hookName: string): string => {
   return `import { renderHook } from '@testing-library/react-hooks';
 import { describe, expect, it } from 'vitest';
 import ${hookName} from './${hookName}';
@@ -32,14 +33,14 @@ describe('${hookName}', () => {
 `;
 };
 
-const createHookTypeDefinition = (hookName: string) => {
+const createHookTypeDefinition = (hookName: string): string => {
   return `export type ${capitalize(hookName)}ReturnType = {
   // define return type here
 };
 `;
 };
 
-const generateHookFiles = (hookName: string, hasState: boolean = false, hasEffect: boolean = false) => {
+const generateHookFiles = (hookName: string, hasState: boolean = false, hasEffect: boolean = false): FileObject => {
   const filesToGenerate = {
     ...createFileObject(
       hookName,

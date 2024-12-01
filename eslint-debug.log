@@ -1,0 +1,27 @@
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\generateComponent\componentTemplateUtils.ts
+  18:15  error  Parsing error: Unexpected token :
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\generateComponent\generateComponent.ts
+  13:34  error  Parsing error: Unexpected token =>
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\generateHook\generateHook.ts
+  16:31  error  Parsing error: Unexpected token =>
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\generateHook\hookTemplateUtils.ts
+  3:35  error  Parsing error: Unexpected token :
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\helpers\generatorHelpers.ts
+  10:6  error  Parsing error: Unexpected token :
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\helpers\types.ts
+  1:8  error  Parsing error: Unexpected token interface
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\commands\helpers\vscodeHelpers.ts
+  18:44  error  Parsing error: Unexpected token :
+
+C:\Users\nyevi\Desktop\Coding\Extensions\react-wizardry\src\extension.ts
+  9:33  error  Parsing error: Unexpected token :
+
+✖ 8 problems (8 errors, 0 warnings)
+

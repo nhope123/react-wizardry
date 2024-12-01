@@ -13,7 +13,7 @@ import { generateHookFiles } from './hookTemplateUtils.js';
 
 const regex = /^use/i;
 
-const generateHook = async () => {
+const generateHook = async (): Promise<null | undefined> => {
 	const workspaceFolders = getCurrentWorkspaceFolders();
 	if (!workspaceFolders) {
 		return null;

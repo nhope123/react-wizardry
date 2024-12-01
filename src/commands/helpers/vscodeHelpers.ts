@@ -6,7 +6,7 @@ import * as fs from 'fs';
 const SELECT_FOLDER_OPTION = 'Select Folder';
 const CURRENT_FOLDER_OPTION = 'Current Folder';
 
-export const getCurrentWorkspaceFolders = () => {
+export const getCurrentWorkspaceFolders = (): readonly vscode.WorkspaceFolder[] | undefined => {
 	const workspaceFolders = vscode.workspace.workspaceFolders;
 
 	if (!workspaceFolders) {
@@ -15,11 +15,11 @@ export const getCurrentWorkspaceFolders = () => {
 	return workspaceFolders;
 };
 
-export const showQuickPick = async (options: string[], placeHolder: string) => {
+export const showQuickPick = async (options: string[], placeHolder: string): Promise<string | undefined> => {
 	return await vscode.window.showQuickPick(options, { placeHolder });
 };
 
-export const showInputBox = async (prompt: string, invalidText: string) => {
+export const showInputBox = async (prompt: string, invalidText: string): Promise<string | undefined> => {
 	return await vscode.window.showInputBox({
 		prompt,
 		validateInput: (input) => (input ? null : invalidText),
@@ -44,7 +44,7 @@ export const findDirectory = async (name: string): Promise<string | undefined> =
 	return;
 };
 
-export const getComponentName = async (prompt: string, invalidText: string) => {
+export const getComponentName = async (prompt: string, invalidText: string): Promise<string | undefined> => {
   // Prompt the user for the component name
   let componentName = await showInputBox(prompt, invalidText);
 
@@ -61,7 +61,7 @@ export const getComponentName = async (prompt: string, invalidText: string) => {
   return componentName;
 };
 
-export const getTargetFolder = async (options?: TargetFolder[]) => {
+export const getTargetFolder = async (options?: TargetFolder[]): Promise<string | undefined> => {
   const workspaceFolder = getCurrentWorkspaceFolders();
 	if (!workspaceFolder) {
 		return;
@@ -123,7 +123,7 @@ export const getTargetFolder = async (options?: TargetFolder[]) => {
   return targetFolderPath;
 };
 
-export const createFilesWithContent = (folderPath: string, files: FileObject) => {
+export const createFilesWithContent = (folderPath: string, files: FileObject): void => {
   // Create each file with its corresponding content
 	for (const [fileName, content] of Object.entries(files)) {
 		const filePath = path.join(folderPath, fileName);

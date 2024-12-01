@@ -1,4 +1,5 @@
-import { createFileObject } from "../helpers/generatorHelpers.js";
+import { createFileObject } from "../helpers/generatorHelpers";
+import { FileObject } from "../helpers/types";
 
 /**
  * Generates the source code for a React functional component.
@@ -17,7 +18,7 @@ import { createFileObject } from "../helpers/generatorHelpers.js";
 const createComponentSource = (
 	componentName: string,
 	hasProps: boolean = false
-) => {
+): string => {
 	const componentFunctionType = hasProps
 		? `FC<${componentName}Props> = (props)`
 		: `FC = ()`;
@@ -41,7 +42,7 @@ const ${componentName}: ${componentFunctionType} => {
  * @param componentName - The name of the component for which the props interface is being created.
  * @returns A string representing the TypeScript interface definition for the component's props.
  */
-const createComponentPropsDefinition = (componentName: string) =>
+const createComponentPropsDefinition = (componentName: string): string =>
 	`interface ${componentName}Props {\n\n};\n\nexport { ${componentName}Props };`;
 
 /**
@@ -53,7 +54,7 @@ const createComponentPropsDefinition = (componentName: string) =>
  * @param componentName - The name of the component to generate the test for.
  * @returns A string containing the test file content for the specified component.
  */
-const createComponentTestContent = (componentName: string) => {
+const createComponentTestContent = (componentName: string): string => {
 	const componentTestImport = `import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import ${componentName} from './${componentName}';
@@ -80,7 +81,7 @@ describe('${componentName}', () => {
 const generateComponentFiles = (
 	componentName: string,
 	hasProps: boolean = false
-) => {
+): FileObject => {
 	const filesToGenerate = {
 		...createFileObject(
 			componentName,

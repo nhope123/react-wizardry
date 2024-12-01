@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"module": "CommonJS",
 		"target": "ES2022",
-		"outDir": "out",
+		"outDir": "dist",
 		"lib": ["dom", "ES2022"],
 		"baseUrl": "./",
 		"paths": {
@@ -10,7 +10,7 @@
 			"@commands/*": ["./src/commands/*"]
 		},
 		"sourceMap": true,
-		"rootDir": "./",
+		"rootDir": ".",
 		"strict": true /* enable all strict type-checking options */,
 		"forceConsistentCasingInFileNames": true,
 		"allowImportingTsExtensions": true,

@@ -6,7 +6,7 @@ import generateHook from './commands/generateHook/generateHook.js';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): void {
 	
   context.subscriptions.push(
 		vscode.commands.registerCommand('react-wizardry.createComponent', generateComponent)
@@ -18,4 +18,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate():  void {}

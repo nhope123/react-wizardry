@@ -7,10 +7,10 @@ import {
 	getCurrentWorkspaceFolders,
 	getTargetFolder,
 	showQuickPick,
-} from '../helpers/vscodeHelpers.js';
-import { generateComponentFiles } from './componentTemplateUtils.js';
+} from '../helpers/vscodeHelpers';
+import { generateComponentFiles } from './componentTemplateUtils';
 
-let generateComponent = async () => {
+let generateComponent = async (): Promise<void> => {
 	const workspaceFolder = getCurrentWorkspaceFolders();
 	if (!workspaceFolder) {
 		return;

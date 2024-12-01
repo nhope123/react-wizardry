@@ -3,7 +3,8 @@
 const config = {
   preset: 'ts-jest', // Use ts-jest for TypeScript support
   testEnvironment: 'node', // Use Node.js as the test environment
-  roots: ['<rootDir>/src'], // Define the root folder for tests
+  // roots: ['<rootDir>/src'], // Define the root folder for tests
+  rootDir: '.',
   transform: {
     '^.+\\.tsx?$': 'ts-jest', // Transform TypeScript files
   },
@@ -15,6 +16,9 @@ const config = {
   moduleNameMapper: {
     // Map module paths for testing
     '^@/(.*)$': '<rootDir>/src/$1',
+    'vscode': '<rootDir>/node_modules/vscode',
   },
+  verbose: true
 };
+
 export {config}
