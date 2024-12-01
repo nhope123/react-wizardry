@@ -3,6 +3,7 @@
   "displayName": "'React Wizardry'",
   "description": "Simplify your React development workflow with React Wizardry!",
   "version": "1.0.1",
+  "type": "module",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -14,7 +15,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "react-wizardry.generateComponent",
+        "command": "react-wizardry.createComponent",
         "title": "Create Component",
         "category": "RWiz"
       },
@@ -31,19 +32,21 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "lint": "eslint .",
+    "test": "vitest"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.6",
-    "@types/node": "18.x",
+    "@types/mock-require": "^3.0.0",
+    "@types/node": "22.10.1",
     "@types/vscode": "^1.95.0",
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "@vscode/test-cli": "^0.0.4",
-    "@vscode/test-electron": "^2.3.8",
-    "eslint": "^8.54.0",
-    "typescript": "^5.3.2"
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.16.0",
+    "mock-require": "^3.0.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.6"
   },
   "dependencies": {
     "@vscode/vsce": "^3.2.1",

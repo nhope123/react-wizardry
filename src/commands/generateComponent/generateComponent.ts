@@ -2,12 +2,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import {
+  createFilesWithContent,
   getComponentName,
 	getCurrentWorkspaceFolders,
-	showInputBox,
+	getTargetFolder,
 	showQuickPick,
-} from '../helpers/vscodeHelpers';
-import { generateComponentFiles } from './helpers';
+} from '../helpers/vscodeHelpers.ts';
+import { generateComponentFiles } from './componentTemplateUtils.ts';
 
 let generateComponent = async () => {
 	const workspaceFolder = getCurrentWorkspaceFolders();
@@ -30,31 +31,9 @@ let generateComponent = async () => {
 		(await showQuickPick(['Yes', 'No'], 'Does the component have props?')) ===
 		'Yes';
 
-	// Let the user select a folder or use the active folder
-	const selectedFolder = await showQuickPick(
-		['Current Folder', 'Select Folder'],
-		'Where do you want to create the component?'
-	);
-
-	let targetFolderPath = workspaceFolder[0].uri.fsPath; // Default to root folder
-
-	if (selectedFolder === 'Select Folder') {
-		const folderUri = await vscode.window.showOpenDialog({
-			canSelectFolders: true,
-			canSelectFiles: false,
-			canSelectMany: false,
-			openLabel: 'Select a folder',
-		});
-
-		if (folderUri && folderUri[0]) {
-			targetFolderPath = folderUri[0].fsPath;
-		} else {
-			vscode.window.showErrorMessage(
-				'No folder selected. Operation cancelled.'
-			);
-			return;
-		}
-	}
+	// Get target folder
+	let targetFolderPath = await getTargetFolder();
+  if (! targetFolderPath) {return;}
 
 	// Create the folder for the new component
 	const componentFolderPath = path.join(targetFolderPath, componentName);
@@ -78,11 +57,8 @@ let generateComponent = async () => {
 	const files = generateComponentFiles(componentName, hasProps);
 
 	// Create each file with its corresponding content
-	for (const [fileName, content] of Object.entries(files)) {
-		const filePath = path.join(componentFolderPath, fileName);
-		fs.writeFileSync(filePath, content);
-	}
-
+  createFilesWithContent(componentFolderPath, files);
+	
 	vscode.window.showInformationMessage(
 		`Component ${componentName} created successfully!`
 	);

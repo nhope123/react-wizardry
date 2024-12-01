@@ -1,21 +1,21 @@
-import { createFileObject } from "../helpers/generatorHelpers";
+import { capitalize, createFileObject } from "../helpers/generatorHelpers.ts";
 
 const createHookSource = (hookName: string, hasState: boolean, hasEffect: boolean) => {
   const stateImport = hasState || hasEffect ? `import { ${hasState ? 'useState,' : ''} ${hasEffect ? 'useEffect' : ''} } from 'react';\n` : '';
   const stateDeclaration = hasState ? `const [state, setState] = useState<>(null);\n` : '';
   const effectDeclaration = hasEffect ? `useEffect(() => {\n    // effect logic\n  }, []);\n` : '';
 
-  return `${stateImport}\n
-const ${hookName} = () => {
-  ${stateDeclaration}
+  return (
+`${stateImport}import { ${capitalize(hookName)}ReturnType } from './types';
 
-  ${effectDeclaration}
-  
+const ${hookName} = (): ${capitalize(hookName)}ReturnType  => {
+  ${stateDeclaration}
+  ${effectDeclaration}  
   return {};
 };
 
 export default ${hookName};
-`;
+`);
 };
 
 const createHookTestContent = (hookName: string) => {
@@ -33,7 +33,7 @@ describe('${hookName}', () => {
 };
 
 const createHookTypeDefinition = (hookName: string) => {
-  return `export type ${hookName}ReturnType = {
+  return `export type ${capitalize(hookName)}ReturnType = {
   // define return type here
 };
 `;

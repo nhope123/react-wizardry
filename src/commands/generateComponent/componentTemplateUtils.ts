@@ -1,4 +1,4 @@
-import { createFileObject } from "../helpers/generatorHelpers";
+import { createFileObject } from "../helpers/generatorHelpers.ts";
 
 /**
  * Generates the source code for a React functional component.
@@ -104,4 +104,9 @@ const generateComponentFiles = (
 	return filesToGenerate;
 };
 
-export { generateComponentFiles };
+export {
+	createComponentPropsDefinition,
+	createComponentSource,
+	createComponentTestContent,
+	generateComponentFiles
+ };
